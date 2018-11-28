@@ -94,6 +94,7 @@ ECHON=$(which echo)
 [ ${?} -ne 0 -o -z "${ECHON}" ] && ECHON="echo" || ECHON="${ECHON} -n "
 ${ECHON} -n 'Invoking TarPM index merge operation...'
 STATUS=$(${CURLBIN} \
+    -k \
     -s \
     --write-out "%{http_code}" \
     -u "${AUTH}" \

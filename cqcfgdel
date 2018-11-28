@@ -55,6 +55,7 @@ _delete_configuration()
     QUERYSTRING="${CONST_PARAMS}"
     URL="${instance}${FILEPATH}${QUERYSTRING}"
     STATUS=$(${CURLBIN} \
+        -k \
         -s \
         --write-out "%{http_code}" \
         -u "$AUTH" \

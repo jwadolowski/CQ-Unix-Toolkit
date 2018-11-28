@@ -21,14 +21,14 @@ Invoke TAR PersistenceManager optimization/compaction process for specified CQ
 instance in the background by default with 1 ms sleeping phase between each
 TarPM transaction. There is possibility to invoke compaction in the background
 and polling its status in the foreground to wait until operation is finished.
- 
+
 Examples:
-  cqtpm -u admin -f -s 60        # Invoke compaction in the background and waits 
+  cqtpm -u admin -f -s 60        # Invoke compaction in the background and waits
                                  # in the foreground (using status pooling every
                                  # minute) for the end of process
   cqtpm -i http://localhost:5510 # Invoke compaction for localhost instance on
                                  # tcp port 5510
-  cqtpm -p secret -d 2           # Invoke compaction in the background using 
+  cqtpm -p secret -d 2           # Invoke compaction in the background using
                                  # provided password: secret, with additional
                                  # delay 2ms between optimization transaction
 
@@ -37,10 +37,10 @@ Options:
   -u                    use specified username for connection
   -p                    use provided password for authentication
   -i                    use specified instance URL to connect
-  -f                    simulates optimization in the foreground as blocking 
+  -f                    simulates optimization in the foreground as blocking
                         operation. This may not work for all versions.
-  -s                    sets delay in seconds between each status pooling 
-                        request (default 10 seconds). Used only when -f 
+  -s                    sets delay in seconds between each status pooling
+                        request (default 10 seconds). Used only when -f
                         parameter is specified.
   -d                    sets delay in milliseconds (default 1 ms) between each
                         compacted transaction
@@ -117,6 +117,7 @@ ${ECHON} "Stopping current TarPM compaction (if started)..."
 FILEPATH="/system/console/jmx/com.adobe.granite%3Atype%3DRepository/op/stopTar\
 Optimization/"
 STATUS=$(${CURLBIN} \
+    -k \
     -s \
     -u "${AUTH}" \
         --write-out "%{http_code}" \
@@ -149,6 +150,7 @@ ${ECHON} "Setting TarPM compaction sleeping phase..."
 FILEPATH="/system/console/jmx/com.adobe.granite%3Atype%3DRepository/a/TarOptimi\
 zationDelay"
 STATUS=$(${CURLBIN} \
+    -k \
     -s \
     -u "${AUTH}" \
      --write-out "%{http_code}" \
@@ -187,6 +189,7 @@ ${ECHON} "Running TarPM compaction in the ${background_text}..."
 FILEPATH="/system/console/jmx/com.adobe.granite%3Atype%3DRepository/op/startTar\
 Optimization/"
 STATUS=$(${CURLBIN} \
+    -k \
     -s \
     -u "${AUTH}" \
     --write-out "%{http_code}" \
@@ -220,11 +223,12 @@ if [ "${background}" = "false" ]
 then
     echo "Pooling TarPM optimization status..."
     tarpm_status="1"
-    
+
     while [ "${tarpm_status}" != "0" ]
     do
         sleep "${pooling}s"
         STATUS=$(${CURLBIN} \
+                    -k \
                     -s \
                     -u "${AUTH}" \
                     --write-out "%{http_code}" \

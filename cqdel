@@ -19,20 +19,20 @@ _usage()
 Usage: $(basename "${0}") [OPTION...] package-name
 Removes already uploaded CRX package by group id and name in CRX Package
 Manager using instance URL.
- 
+
 Examples:
   cqdel -u admin pack            # Remove package named pack
   cqdel -u admin -g GRP pack     # Remove package named pack in group GRP
   cqdel -i http://localhost:5510 # Remove package for localhost instance on tcp
         -g com.group -p secret   # port 5510 named stuff in group:com.group
-        stuff                    # with password provided: secret 
+        stuff                    # with password provided: secret
 
 Options:
 
   -u                    use specified usernamed for connection
   -p                    use provided password for authentication
   -i                    use specified instance URL to connect
-  -g                    locate package by additional group ID  
+  -g                    locate package by additional group ID
 
 
 EOT
@@ -98,6 +98,7 @@ FILEPATH="/crx/packmgr/service.jsp"
 REFERERHEADER="Referer: ${REFERER}"
 
 STATUS=$(${CURLBIN} \
+    -k \
     -s \
     --write-out "%{http_code}" \
     -u "${AUTH}" \
@@ -106,7 +107,7 @@ STATUS=$(${CURLBIN} \
     ${group_switch} "${group_arg}" \
     -F "name=${name}" \
     "${instance}${FILEPATH}")
-    
+
 EXITCODE=${?}
 "${API}" -C ${EXITCODE}
 STATUSCODE=$(echo "${STATUS}" | tail -n 1)

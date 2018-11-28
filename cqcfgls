@@ -42,6 +42,7 @@ _list_configurations()
     REFERERHEADER="Referer: ${URL}"
 
     STATUS=$(${CURLBIN} \
+        -k \
         -s \
         --write-out "%{http_code}" \
         -u "${AUTH}" \

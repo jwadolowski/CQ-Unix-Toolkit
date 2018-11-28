@@ -115,7 +115,7 @@ fi
 echo "           connection URL: ${instance}"
 echo ""
 
-STATUS=$(${CURLBIN} -s -X POST \
+STATUS=$(${CURLBIN} -k -s -X POST \
         --output /dev/null \
         --write-out %{http_code} \
         -u "${AUTH}" \

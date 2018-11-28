@@ -91,6 +91,7 @@ fi
 
 
 STATUS=$(${CURLBIN} \
+    -k \
     -s \
     --write-out "%{http_code}" \
     -u "${AUTH}" \

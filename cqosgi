@@ -162,6 +162,7 @@ AUTH="${username}:${password}"
 REFERERHEADER="Referer: ${REFERER}"
 
 STATUS=$(${CURLBIN} \
+    -k \
     -s \
     --write-out "%{http_code}" \
     -u "${AUTH}" \
@@ -223,6 +224,7 @@ then
 
         echo "${activity}${bundle} (#${bundle_id})"
         STATUS=$(${CURLBIN} \
+            -k \
             -s \
             --write-out "%{http_code}" \
             -u "${AUTH}" \

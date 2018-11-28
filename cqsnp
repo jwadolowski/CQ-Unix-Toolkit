@@ -166,6 +166,7 @@ fi
 
 SNAPSHOT_ID="[G=${group_name}:N=${name}:V=${version}]"
 STATUS=$("${CURLBIN}" \
+        -k \
         -s \
         -I \
         --write-out "\n%{http_code}\n" \
@@ -184,6 +185,7 @@ EXITCODE=$?
 
 
 STATUS=$("${CURLBIN}" \
+        -k \
         -s \
         --write-out "%{http_code}" \
         -u "${AUTH}" \
@@ -206,6 +208,7 @@ then
     if [ ${drop} -eq 1 ]
     then
         STATUS=$(${CURLBIN} \
+                -k \
                 -s \
                 --write-out "%{http_code}" \
                 -u "${AUTH}" \

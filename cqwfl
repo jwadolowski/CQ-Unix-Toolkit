@@ -173,6 +173,7 @@ FILEPATH="${WORKFLOW}.json"
 REFERERHEADER="Referer: ${REFERER}"
 
 STATUS=$(${CURLBIN} \
+    -k \
     -s \
     --write-out "%{http_code}" \
     -u "${AUTH}" \

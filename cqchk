@@ -92,6 +92,7 @@ REFERERHEADER="Referer: ${REFERER}"
 
 
 STATUS=$(${CURLBIN} \
+    -k \
     -s \
     --write-out "%{http_code}" \
     -u "${AUTH}" \
@@ -123,6 +124,7 @@ ${ECHON} "Starting repository consistency check..."
 FILEPATH="/system/console/jmx/com.adobe.granite%3Atype%3DRepository/op/consiste\
 ncyCheck/java.lang.String%2Cjava.lang.Boolean"
 STATUS=$(${CURLBIN} \
+    -k \
     -s \
     --write-out "%{http_code}" \
     -u "${AUTH}" \

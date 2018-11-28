@@ -95,6 +95,7 @@ do
         bad=1
     else
         STATUS=$(${CURLBIN} \
+            -k \
             -s \
             --write-out "%{http_code}" \
             -u "${AUTH}" \

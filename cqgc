@@ -108,6 +108,7 @@ if [ ${force_stop} -eq 1 ]
 then
     ${ECHON} "Stopping DataStore garbage collection (if working)..."
     STATUS=$(${CURLBIN} \
+           -k \
            -s \
            --write-out "%{http_code}" \
            -u "${AUTH}" \
@@ -142,6 +143,7 @@ fi
 # Setting GC sleeping phase delay
 ${ECHON} "Setting DataStore garbage collection sleeping phase..."
 STATUS=$(${CURLBIN} \
+    -k \
     -s \
     --write-out "%{http_code}" \
     -u "${AUTH}" \
